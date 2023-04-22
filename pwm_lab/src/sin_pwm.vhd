@@ -4,6 +4,11 @@ use IEEE.NUMERIC_STD.ALL;
 use IEEE.MATH_REAL.ALL;
 
 entity sin_pwm is
+    generic (
+      constant resolution : integer := 8;
+      constant sin_thresh : integer := 2_500_000; -- 120_000_000/(50Hz)
+      constant dvsr : std_logic_vector (31 downto 0) := std_logic_vector(to_unsigned(6000, 32))
+    );
     Port ( clk : in STD_LOGIC;
            rst : in STD_LOGIC;
            pwm_sin_out : out std_logic);
@@ -12,17 +17,17 @@ end sin_pwm;
 architecture Behavioral of sin_pwm is
     
     
-    constant resolution : integer := 8;
-    constant dvsr : std_logic_vector (31 downto 0) := std_logic_vector(to_unsigned(6000, 32));
+    -- constant resolution : integer := 8;
+    -- constant dvsr : std_logic_vector (31 downto 0) := std_logic_vector(to_unsigned(6000, 32));
 
     signal counter: integer;
     signal sin_pulse: std_logic;
-    signal sin_thresh : integer := 2_500_000; -- 120_000_000/(50Hz)
+    -- signal sin_thresh : integer := 2_500_000; -- 120_000_000/(50Hz)
 
     signal duty_sin : std_logic_vector(resolution downto 0);
 
     -- Start from slides
-    signal addr: unsigned(resolution-1  downto 0);
+    signal addr: unsigned(resolution-1  downto 0) := (others => '0');
     subtype addr_range is integer range 0 to 2**resolution - 1;
     type rom_type is array (addr_range) of unsigned(resolution - 1 downto 0);
     

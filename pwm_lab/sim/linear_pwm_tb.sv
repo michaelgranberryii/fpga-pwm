@@ -5,8 +5,8 @@ module linear_pwm_tb;
     logic pwm_out_tb;
 
     parameter resolution_tb = 8;
-    parameter grad_thresh_tb = 250_000; // sysclk / 500
-    parameter [31:0] dvsr_tb = 488; // sysclk /(pwm_frq*2^8) = 1000 kHz
+    parameter grad_thresh_tb = 600; // 
+    parameter [31:0] dvsr_tb = 48; // sysclk /(pwm_frq*2^8), f_pwm = 1000 kHz
 
     parameter duty_cycle = 4;
 
@@ -19,7 +19,7 @@ module linear_pwm_tb;
     uut(
         .clk(clk_tb),
         .rst(rst_tb),
-        .pwm_out(pwm_out_tb)
+        .pwm_linear_out(pwm_out_tb)
     );
 
     always #duty_cycle clk_tb = ~ clk_tb;
@@ -29,7 +29,7 @@ initial begin
     rst_tb = 1; #duty_cycle; # duty_cycle;
     rst_tb = 0; #duty_cycle; # duty_cycle;
 
-    #500_000_000;
+    #10_000_000;
     $stop;
 end
     

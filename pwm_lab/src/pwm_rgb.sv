@@ -1,8 +1,8 @@
 module pwm_rgb 
 # (
     parameter R = 8,
-    parameter grad_thresh = 2_500_000,
-    parameter [31:0] dvsr = 4882 // sysclk /(pwm_frq*2^8)
+    parameter grad_thresh = 2_500_000, 
+    parameter [31:0] dvsr = 4882 // sysclk /(pwm_frq*2^8), f_pwm = 100 Hz
 )
 (
     input logic clk,
@@ -89,7 +89,7 @@ always_ff @( posedge clk, posedge rst) begin
                 duty_reg <= duty_reg + 1;
             end
 
-            if (duty_reg == 256) begin
+            if (duty_reg == (2**R)) begin
                 currstate <= high;
                 counter <= 0;
             end
@@ -109,7 +109,7 @@ always_ff @( posedge clk, posedge rst) begin
                 hold_counter <= hold_counter + 1;
             end
 
-            if (hold_counter == 256) begin
+            if (hold_counter == (2**R)) begin
                 currstate <= fall;
                 hold_counter <= 0;
                 counter <= 0;

@@ -1,7 +1,8 @@
+`timescale 1ns / 1ps
 module pwm_rgb_tb;
     parameter R_tb = 8;
-    parameter grad_thresh_tb = 2500;
-    parameter [31:0] dvsr_tb = 488; // sysclk /(pwm_frq*2^8)
+    parameter grad_thresh_tb = 100; // 1_250_000 Hz
+    parameter [31:0] dvsr_tb = 10; // sysclk /(pwm_frq*2^8)
 
     logic clk_tb;
     logic rst_tb;
@@ -63,7 +64,7 @@ initial begin
     rst_tb = 1; #duty_cycle; # duty_cycle;
     rst_tb = 0; #duty_cycle; # duty_cycle;
 
-    #1_000_000_000;
+    #6_000_000;
     $stop;
 end
     

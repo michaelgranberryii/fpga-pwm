@@ -3,8 +3,8 @@ module pwm_enhanced_tb;
     parameter R_tb = 8;
     logic clk_tb;
     logic rst_tb;
-    logic [31:0] dvsr_tb = 4882;
-    logic [R_tb:0] duty_tb = 128;
+    logic [31:0] dvsr_tb = 488; // sysclk /(pwm_frq*2^8), f_pwm = 1000 Hz
+    logic [R_tb:0] duty_tb = 64; 
     logic pwm_out_tb;
 
     parameter duty_cycle = 4;
@@ -29,7 +29,7 @@ initial begin
     rst_tb = 1; #duty_cycle; # duty_cycle;
     rst_tb = 0; #duty_cycle; # duty_cycle;
 
-    #1_000_000_000;
+    #10_000_000;
     $stop;
 end
     

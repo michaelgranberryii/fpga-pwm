@@ -50,7 +50,7 @@ always_ff @(posedge clk) begin
             duty_reg <= duty_reg + 1;
         end
 
-        if (duty_reg == 256) begin
+        if (duty_reg == (2**resolution)) begin
             duty_reg <= 0;
         end
     end

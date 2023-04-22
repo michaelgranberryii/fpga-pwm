@@ -1,4 +1,10 @@
-module rainbow_pwm (
+module rainbow_pwm 
+#(
+    parameter R = 8,
+    parameter grad_thresh = 1_000_000,
+    parameter [31:0] dvsr = 488
+)
+(
     input logic clk,
     input logic rst,
     output logic pwm_r_out,
@@ -6,10 +12,7 @@ module rainbow_pwm (
     output logic pwm_b_out
 );
 
-parameter R = 8;
-parameter grad_thresh = 100_000;
-parameter [31:0] dvsr = 488;
-
+// Red LED PWM
 pwm_rgb
 #(
     .R(R),
@@ -24,6 +27,7 @@ red
     .rainbow_out(pwm_r_out)
 );
 
+// Green LED PWM
 pwm_rgb
 #(
     .R(R),
@@ -38,6 +42,7 @@ green
     .rainbow_out(pwm_g_out)
 );
 
+// Blue LED PWM
 pwm_rgb
 #(
     .R(R),
