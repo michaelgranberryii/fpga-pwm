@@ -6,6 +6,10 @@ Zybo Z7-10 FPGA SoC Development Board: PWM Controller for RGB LED Brightness and
 
 In this project, Pulse Width Modulation (PWM) was used to control the brightness of the on-board RGB LED using an FPGA. Moreover, the RGB LEDs were programmed to display all the colors of a rainbow by varying the pulse width to fade the individual RGB LED colors in and out. PWM was also used to generate a low-frequency sine wave to control the RGB LED's brightness, resulting in a smooth pulsing LED. Finally, a servo motor was controlled using PWM, allowing for precise motor positioning. The servo motor continuously rotated 180 degrees and back.
 
+## Demo Video
+
+[Demo on Youtube](https://youtu.be/s2kT3Sqae6k)
+
 ## Dependencies
 
 ### Hardware
